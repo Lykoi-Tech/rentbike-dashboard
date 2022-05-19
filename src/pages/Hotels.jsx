@@ -1,17 +1,43 @@
-import { useState } from 'react'
-
-import { useFetch } from '../hooks/useFetch'
+import { useState, useEffect } from 'react'
 
 import { Header } from '../components/Header'
 
 import { Pagination } from '../components/Pagination'
 
+import { Modal } from '../components/Modal'
+
+import { FormHotel } from '../forms/FormHotel'
+
 import { endPoints } from '../services/main'
 
 import { PlusIcon } from '@heroicons/react/solid'
 
+import axios from 'axios'
+
+import { useAlert } from '../hooks/useAlert'
+
+import { Alert } from '../components/Alert'
+
 const Hotels = () => {
-  const hotels = useFetch(endPoints.hotels.allHotels)
+  const [hotels, setHotels] = useState([])
+
+  const [open, setOpen] = useState(false)
+
+  const { alert, setAlert, toggleAlert } = useAlert()
+
+  useEffect(() => {
+    async function getHotels () {
+      const response = await axios.get(endPoints.hotels.allHotels)
+
+      setHotels(response.data)
+    }
+
+    try {
+      getHotels()
+    } catch (error) {
+      console.error(error)
+    }
+  }, [alert])
 
   const [currentPage, setCurrentPage] = useState(1)
   const [hotelsPerPage, setHotelsPerPage] = useState(6)
@@ -34,6 +60,7 @@ const Hotels = () => {
           <div className='mt-5 flex lg:mt-0 lg:ml-4'>
             <span className='sm:ml-3'>
               <button
+                onClick={() => setOpen(true)}
                 type='button'
                 className='inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
               >
@@ -44,6 +71,7 @@ const Hotels = () => {
           </div>
         </div>
       </div>
+      <Alert alert={alert} handleClose={toggleAlert} />
       {
         hotels?.length > 6 && <Pagination
           thingsPerPage={hotelsPerPage}
@@ -132,6 +160,9 @@ const Hotels = () => {
           </div>
         </div>
       </div>
+      <Modal open={open} setOpen={setOpen}>
+        <FormHotel setOpen={setOpen} setAlert={setAlert} />
+      </Modal>
     </div>
   )
 }

@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import { useFetch } from '../hooks/useFetch'
-
 import { Header } from '../components/Header'
 
 import { Pagination } from '../components/Pagination'

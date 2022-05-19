@@ -29,7 +29,8 @@ const FormUser = ({ setOpen, setAlert, user }) => {
       isDeleted: formData.get('isSuscribed') === 'true'
     }
 
-    addUser(data).then(() => {
+    addUser(data).then((res) => {
+      console.log(res)
       setAlert({
         active: true,
         message: 'Usuario Agregado Correctamente',
