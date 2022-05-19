@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 
 import { Header } from '../components/Header'
 
+import { Link } from 'react-router-dom'
+
 import { Pagination } from '../components/Pagination'
 
 import { Modal } from '../components/Modal'
@@ -143,7 +145,7 @@ const Hotels = () => {
                         <div>
                           <div className='text-sm font-medium text-gray-900'>{hotel.phone}</div>
                           <div className='text-sm text-gray-500'>{hotel.email}</div>
-                          <a href={hotel.web} className='text-sm font-medium text-purple-600 underline'>Ir a página web</a>
+                          <Link to={hotel.web} className='text-sm font-medium text-purple-600 underline'>Ir a página web</Link>
                         </div>
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap'>
@@ -156,9 +158,9 @@ const Hotels = () => {
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                        <a href={`/hotels/edit/${hotel.id}`} className='text-indigo-600 hover:text-indigo-900'>
+                        <Link to={`/hotels/edit/${hotel.id}`} className='text-indigo-600 hover:text-indigo-900'>
                           Editar
-                        </a>
+                        </Link>
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
                         <button className='text-red-600 hover:text-red-900' onClick={() => handleDelete(hotel.id)}>

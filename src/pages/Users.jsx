@@ -4,6 +4,8 @@ import { Header } from '../components/Header'
 
 import { Pagination } from '../components/Pagination'
 
+import { Link } from 'react-router-dom'
+
 import { Modal } from '../components/Modal'
 
 import { FormUser } from '../forms/FormUser'
@@ -177,9 +179,9 @@ const Users = () => {
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                        <a href={`/users/edit/${user.id}`} className='text-indigo-600 hover:text-indigo-900'>
+                        <Link to={`/users/edit/${user.id}`} className='text-indigo-600 hover:text-indigo-900'>
                           Editar
-                        </a>
+                        </Link>
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
                         <button className='text-red-600 hover:text-red-900' onClick={() => handleDelete(user.id)}>

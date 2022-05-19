@@ -1,6 +1,6 @@
 import { useAuth } from '../hooks/useAuth'
 
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
@@ -62,27 +62,27 @@ const Header = () => {
                 </div>
                 <div className='flex-1 flex items-center justify-center sm:items-stretch sm:justify-start'>
                   <div className='flex-shrink-0 flex items-center'>
-                    <a href='/'>
+                    <Link to='/'>
                       <img
                         className='block lg:hidden h-8 w-auto'
                         src={logo}
                         alt='Workflow'
                       />
-                    </a>
-                    <a href='/'>
+                    </Link>
+                    <Link to='/'>
                       <img
                         className='hidden lg:block h-8 w-auto'
                         src={logo}
                         alt='Workflow'
                       />
-                    </a>
+                    </Link>
                   </div>
                   <div className='hidden sm:block sm:ml-6'>
                     <div className='flex space-x-4'>
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className={classNames(
                             item.current ? 'bg-red-900 text-white' : 'text-red-300 hover:bg-red-700 hover:text-white',
                             'px-3 py-2 rounded-md text-sm font-medium'
@@ -90,7 +90,7 @@ const Header = () => {
                           aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -119,13 +119,13 @@ const Header = () => {
                       <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <button
                               onClick={auth.logout()}
                               href='/'
                               className={classNames(active ? 'bg-red-100' : '', 'cursor-pointer block px-4 py-2 text-sm text-red-700')}
                             >
                               Cerrar Sesión
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>
