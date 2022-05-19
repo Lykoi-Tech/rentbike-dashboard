@@ -12,7 +12,7 @@ const Countries = () => {
   const countries = useFetch(endPoints.countries.allCountries)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [countriesPerPage, setCountriesPerPage] = useState(10)
+  const [countriesPerPage, setCountriesPerPage] = useState(6)
 
   const indexOfLastCountry = currentPage * countriesPerPage
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage
