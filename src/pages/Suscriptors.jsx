@@ -11,8 +11,6 @@ import { endPoints } from '../services/main'
 const Suscriptors = () => {
   const suscriptors = useFetch(endPoints.suscriptors.allSuscriptors)
 
-  console.log(suscriptors)
-
   const [currentPage, setCurrentPage] = useState(1)
   const [suscriptorsPerPage, setSuscriptorsPerPage] = useState(6)
 

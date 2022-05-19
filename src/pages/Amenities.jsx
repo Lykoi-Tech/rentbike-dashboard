@@ -11,8 +11,6 @@ import { endPoints } from '../services/main'
 const Amenities = () => {
   const amenities = useFetch(endPoints.amenities.allAmenities)
 
-  console.log(amenities)
-
   const [currentPage, setCurrentPage] = useState(1)
   const [amenitiesPerPage, setAmenitiesPerPage] = useState(6)
 

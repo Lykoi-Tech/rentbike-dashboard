@@ -21,8 +21,6 @@ const Bookings = () => {
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
 
-  console.log(bookings)
-
   return (
     <div className='Bookings'>
       <Header />

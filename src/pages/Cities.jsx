@@ -11,8 +11,6 @@ import { endPoints } from '../services/main'
 const Cities = () => {
   const cities = useFetch(endPoints.cities.allCities)
 
-  console.log(cities)
-
   const [currentPage, setCurrentPage] = useState(1)
   const [citiesPerPage, setCitiesPerPage] = useState(6)
 
