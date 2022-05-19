@@ -102,18 +102,20 @@ const Home = () => {
                 </p>
                 <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
                   <div className='rounded-md shadow'>
-                    <button
+                    <a
+                      href='/users'
                       className='w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-10'
                     >
                       Ver Usuarios
-                    </button>
+                    </a>
                   </div>
                   <div className='mt-3 sm:mt-0 sm:ml-3'>
-                    <button
+                    <a
+                      href='/hotels'
                       className='w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 md:py-4 md:text-lg md:px-10'
                     >
                       Ver Hoteles
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

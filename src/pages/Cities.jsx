@@ -24,15 +24,17 @@ const Cities = () => {
   const paginateBack = () => setCurrentPage(currentPage - 1)
 
   return (
-    <div className='Reviews'>
+    <div className='Cities'>
       <Header />
-      <Pagination
-        thingsPerPage={citiesPerPage}
-        totalThings={cities?.length}
-        currentPage={currentPage}
-        paginateBack={paginateBack}
-        paginateFront={paginateFront}
-      />
+      {
+        cities?.length > 6 && <Pagination
+          thingsPerPage={citiesPerPage}
+          totalThings={cities?.length}
+          currentPage={currentPage}
+          paginateBack={paginateBack}
+          paginateFront={paginateFront}
+                              />
+      }
       <div className='flex flex-col max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
         <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>

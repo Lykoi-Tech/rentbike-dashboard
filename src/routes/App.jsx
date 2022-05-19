@@ -9,6 +9,7 @@ import { Login } from '../pages/Login'
 import { General } from '../pages/General'
 import { Users } from '../pages/Users'
 import { Hotels } from '../pages/Hotels'
+import { Bookings } from '../pages/Bookings'
 import { Reviews } from '../pages/Reviews'
 import { Amenities } from '../pages/Amenities'
 import { Countries } from '../pages/Countries'
@@ -28,6 +29,7 @@ const App = () => {
               <Route path='/general' element={<General />} />
               <Route path='/users' element={<Users />} />
               <Route path='/hotels' element={<Hotels />} />
+              <Route path='/bookings' element={<Bookings />} />
               <Route path='/reviews' element={<Reviews />} />
               <Route path='/amenities' element={<Amenities />} />
               <Route path='/countries' element={<Countries />} />

@@ -19,6 +19,13 @@ const endPoints = {
     updateHotel: (id) => `${API}/api/${VERSION}/hotels/${id}`,
     deleteHotel: (id) => `${API}/api/${VERSION}/hotels/${id}`
   },
+  bookings: {
+    addBooking: `${API}/api/${VERSION}/bookings`,
+    allBookings: `${API}/api/${VERSION}/bookings`,
+    getBooking: (id) => `${API}/api/${VERSION}/bookings/${id}`,
+    updateBooking: (id) => `${API}/api/${VERSION}/bookings/${id}`,
+    deleteBooking: (id) => `${API}/api/${VERSION}/bookings/${id}`
+  },
   reviews: {
     addReview: `${API}/api/${VERSION}/reviews`,
     allReviews: `${API}/api/${VERSION}/reviews`,

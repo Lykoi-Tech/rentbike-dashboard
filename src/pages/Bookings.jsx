@@ -8,30 +8,32 @@ import { Pagination } from '../components/Pagination'
 
 import { endPoints } from '../services/main'
 
-const Reviews = () => {
-  const reviews = useFetch(endPoints.reviews.allReviews)
+const Bookings = () => {
+  const bookings = useFetch(endPoints.bookings.allBookings)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [reviewsPerPage, setReviewsPerPage] = useState(6)
+  const [BookingsPerPage, setBookingsPerPage] = useState(6)
 
-  const indexOfLastReview = currentPage * reviewsPerPage
-  const indexOfFirstReview = indexOfLastReview - reviewsPerPage
-  const currentReviews = reviews?.slice(indexOfFirstReview, indexOfLastReview)
+  const indexOfLastBooking = currentPage * BookingsPerPage
+  const indexOfFirstBooking = indexOfLastBooking - BookingsPerPage
+  const currentBookings = bookings?.slice(indexOfFirstBooking, indexOfLastBooking)
 
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
 
+  console.log(bookings)
+
   return (
-    <div className='Reviews'>
+    <div className='Bookings'>
       <Header />
       {
-        reviews?.length > 6 && <Pagination
-          thingsPerPage={reviewsPerPage}
-          totalThings={reviews?.length}
+        bookings?.length > 6 && <Pagination
+          thingsPerPage={BookingsPerPage}
+          totalThings={bookings?.length}
           currentPage={currentPage}
           paginateBack={paginateBack}
           paginateFront={paginateFront}
-                               />
+                                />
       }
       <div className='flex flex-col max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
         <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -50,13 +52,19 @@ const Reviews = () => {
                       Para Hotel
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Por Reserva
+                      Ingreso
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Resultado
+                      Egreso
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Eliminado
+                      Precio por Noche
+                    </th>
+                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      Pagado
+                    </th>
+                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      Cancelado
                     </th>
                     <th scope='col' className='relative px-6 py-3'>
                       <span className='sr-only'>Editar</span>
@@ -67,18 +75,26 @@ const Reviews = () => {
                   </tr>
                 </thead>
                 <tbody className='bg-white divide-y divide-gray-200'>
-                  {currentReviews?.map((review) => (
-                    <tr key={review.id}>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{review.id}</td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{review.UserId}</td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{review.HotelId}</td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{review.BookingId}</td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{Math.ceil((review.cleaning + review.location + review.attentionService + review.comfortable + review.facilities + review.priceQualityRatio) / 6)}</td>
+                  {currentBookings?.map((booking) => (
+                    <tr key={booking.id}>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{booking.id}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{booking.UserId}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{booking.hotelName}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{booking.checkIn}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{booking.checkOut}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>$ {booking.pricePerNight}</td>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         {
-                          review.isDeleted
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Si</span>
-                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>No</span>
+                          booking.paidOut
+                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Si</span>
+                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>No</span>
+                        }
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap'>
+                        {
+                          booking.isCanceled
+                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>No Cancelado</span>
+                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Cancelado</span>
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
@@ -103,4 +119,4 @@ const Reviews = () => {
   )
 }
 
-export { Reviews }
+export { Bookings }

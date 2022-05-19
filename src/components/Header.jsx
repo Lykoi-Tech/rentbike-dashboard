@@ -32,6 +32,7 @@ const Header = () => {
     { name: 'General', href: '/general', current: location.pathname.substring(1) === 'general' },
     { name: 'Usuarios', href: '/users', current: location.pathname.substring(1) === 'users' },
     { name: 'Hoteles', href: '/hotels', current: location.pathname.substring(1) === 'hotels' },
+    { name: 'Reservas', href: '/bookings', current: location.pathname.substring(1) === 'bookings' },
     { name: 'Reseñas', href: '/reviews', current: location.pathname.substring(1) === 'reviews' },
     { name: 'Comodidades', href: '/amenities', current: location.pathname.substring(1) === 'amenities' },
     { name: 'Países', href: '/countries', current: location.pathname.substring(1) === 'countries' },

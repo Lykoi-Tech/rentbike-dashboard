@@ -24,13 +24,15 @@ const Hotels = () => {
   return (
     <div className='Hotels'>
       <Header />
-      <Pagination
-        thingsPerPage={hotelsPerPage}
-        totalThings={hotels?.length}
-        currentPage={currentPage}
-        paginateBack={paginateBack}
-        paginateFront={paginateFront}
-      />
+      {
+        hotels?.length > 6 && <Pagination
+          thingsPerPage={hotelsPerPage}
+          totalThings={hotels?.length}
+          currentPage={currentPage}
+          paginateBack={paginateBack}
+          paginateFront={paginateFront}
+                              />
+      }
       <div className='flex flex-col max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
         <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
