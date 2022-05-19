@@ -1,17 +1,43 @@
-import { useState } from 'react'
-
-import { useFetch } from '../hooks/useFetch'
+import { useState, useEffect } from 'react'
 
 import { Header } from '../components/Header'
 
 import { Pagination } from '../components/Pagination'
 
+import { Modal } from '../components/Modal'
+
+import { FormAmenity } from '../forms/FormAmenity'
+
 import { endPoints } from '../services/main'
 
 import { PlusIcon } from '@heroicons/react/solid'
 
+import axios from 'axios'
+
+import { useAlert } from '../hooks/useAlert'
+
+import { Alert } from '../components/Alert'
+
 const Amenities = () => {
-  const amenities = useFetch(endPoints.amenities.allAmenities)
+  const [amenities, setAmenities] = useState([])
+
+  const [open, setOpen] = useState(false)
+
+  const { alert, setAlert, toggleAlert } = useAlert()
+
+  useEffect(() => {
+    async function getAmenities () {
+      const response = await axios.get(endPoints.amenities.allAmenities)
+
+      setAmenities(response.data)
+    }
+
+    try {
+      getAmenities()
+    } catch (error) {
+      console.error(error)
+    }
+  }, [alert])
 
   const [currentPage, setCurrentPage] = useState(1)
   const [amenitiesPerPage, setAmenitiesPerPage] = useState(6)
@@ -29,10 +55,23 @@ const Amenities = () => {
       <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
         <div className='lg:flex lg:items-center lg:justify-between mb-8'>
           <div className='flex-1 min-w-0'>
-            <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate'>Lista de Usuarios</h2>
+            <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate'>Lista de Comodidades</h2>
+          </div>
+          <div className='mt-5 flex lg:mt-0 lg:ml-4'>
+            <span className='sm:ml-3'>
+              <button
+                onClick={() => setOpen(true)}
+                type='button'
+                className='inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
+              >
+                <PlusIcon className='-ml-1 mr-2 h-5 w-5' aria-hidden='true' />
+                Agregar Comodidades
+              </button>
+            </span>
           </div>
         </div>
       </div>
+      <Alert alert={alert} handleClose={toggleAlert} />
       {
         amenities?.length > 6 && <Pagination
           thingsPerPage={amenitiesPerPage}
@@ -80,6 +119,9 @@ const Amenities = () => {
           </div>
         </div>
       </div>
+      <Modal open={open} setOpen={setOpen}>
+        <FormAmenity setOpen={setOpen} setAlert={setAlert} />
+      </Modal>
     </div>
   )
 }
