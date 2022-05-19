@@ -18,6 +18,8 @@ import { useAlert } from '../hooks/useAlert'
 
 import { Alert } from '../components/Alert'
 
+import { deleteUser } from '../services/api/UsersAPI'
+
 const Users = () => {
   const [users, setUsers] = useState([])
 
@@ -48,6 +50,17 @@ const Users = () => {
 
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
+
+  const handleDelete = (id) => {
+    deleteUser(id).then(() => {
+      setAlert({
+        active: true,
+        message: 'Usuario Eliminado Correctamente',
+        type: 'error',
+        autoClose: true
+      })
+    })
+  }
 
   return (
     <div className='Users'>
@@ -169,9 +182,9 @@ const Users = () => {
                         </a>
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                        <a href='/edit' className='text-red-600 hover:text-red-900'>
+                        <button className='text-red-600 hover:text-red-900' onClick={() => handleDelete(user.id)}>
                           Eliminar
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}

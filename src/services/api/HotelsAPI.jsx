@@ -12,9 +12,25 @@ const addHotel = async (body) => {
 
   const response = await axios.post(endPoints.hotels.addHotel, body, options)
 
-  console.log(response.data)
+  return response.data
+}
+
+const deleteHotel = async (id) => {
+  const options = {
+    headers: {
+      accept: '*/*',
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const body = {
+    isBanned: true,
+    isDeleted: true
+  }
+
+  const response = await axios.patch(endPoints.hotels.getHotel(id), body, options)
 
   return response.data
 }
 
-export { addHotel }
+export { addHotel, deleteHotel }

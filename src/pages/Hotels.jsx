@@ -18,6 +18,8 @@ import { useAlert } from '../hooks/useAlert'
 
 import { Alert } from '../components/Alert'
 
+import { deleteHotel } from '../services/api/HotelsAPI'
+
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
 
@@ -48,6 +50,17 @@ const Hotels = () => {
 
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
+
+  const handleDelete = (id) => {
+    deleteHotel(id).then(() => {
+      setAlert({
+        active: true,
+        message: 'Usuario Eliminado Correctamente',
+        type: 'error',
+        autoClose: true
+      })
+    })
+  }
 
   return (
     <div className='Hotels'>
@@ -148,9 +161,9 @@ const Hotels = () => {
                         </a>
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                        <a href='/edit' className='text-red-600 hover:text-red-900'>
+                        <button className='text-red-600 hover:text-red-900' onClick={() => handleDelete(hotel.id)}>
                           Eliminar
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}

@@ -15,4 +15,22 @@ const addUser = async (body) => {
   return response.data
 }
 
-export { addUser }
+const deleteUser = async (id) => {
+  const options = {
+    headers: {
+      accept: '*/*',
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const body = {
+    isBanned: true,
+    isDeleted: true
+  }
+
+  const response = await axios.patch(endPoints.users.getUser(id), body, options)
+
+  return response.data
+}
+
+export { addUser, deleteUser }
