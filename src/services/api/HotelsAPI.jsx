@@ -28,9 +28,22 @@ const deleteHotel = async (id) => {
     isDeleted: true
   }
 
-  const response = await axios.patch(endPoints.hotels.getHotel(id), body, options)
+  const response = await axios.patch(endPoints.hotels.deleteHotel(id), body, options)
 
   return response.data
 }
 
-export { addHotel, deleteHotel }
+const updateHotel = async (id, body) => {
+  const options = {
+    headers: {
+      accept: '*/*',
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const response = await axios.patch(endPoints.hotels.updateHotel(id), body, options)
+
+  return response.data
+}
+
+export { addHotel, deleteHotel, updateHotel }

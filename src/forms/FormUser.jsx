@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { addUser } from '../services/api/UsersAPI'
+import { addUser, updateUser } from '../services/api/UsersAPI'
 
 const FormUser = ({ setOpen, setAlert, user }) => {
   const formRef = useRef(null)
@@ -29,22 +29,28 @@ const FormUser = ({ setOpen, setAlert, user }) => {
       isDeleted: formData.get('isSuscribed') === 'true'
     }
 
-    addUser(data).then(() => {
-      setAlert({
-        active: true,
-        message: 'Usuario Agregado Correctamente',
-        type: 'success',
-        autoClose: false
+    if (user) {
+      updateUser(user.id, data).then(() => {
+        navigate('/users')
       })
-      setOpen(false)
-    }).catch((error) => {
-      setAlert({
-        active: true,
-        message: error.message,
-        type: 'error',
-        autoClose: false
+    } else {
+      addUser(data).then(() => {
+        setAlert({
+          active: true,
+          message: 'Usuario Agregado Correctamente',
+          type: 'success',
+          autoClose: false
+        })
+        setOpen(false)
+      }).catch((error) => {
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoClose: false
+        })
       })
-    })
+    }
   }
 
   return (

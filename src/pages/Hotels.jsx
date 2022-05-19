@@ -55,7 +55,7 @@ const Hotels = () => {
     deleteHotel(id).then(() => {
       setAlert({
         active: true,
-        message: 'Usuario Eliminado Correctamente',
+        message: 'Hotel Eliminado Correctamente',
         type: 'error',
         autoClose: true
       })
@@ -156,7 +156,7 @@ const Hotels = () => {
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                        <a href='/edit' className='text-indigo-600 hover:text-indigo-900'>
+                        <a href={`/hotels/edit/${hotel.id}`} className='text-indigo-600 hover:text-indigo-900'>
                           Editar
                         </a>
                       </td>

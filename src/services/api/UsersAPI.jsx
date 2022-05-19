@@ -28,9 +28,22 @@ const deleteUser = async (id) => {
     isDeleted: true
   }
 
-  const response = await axios.patch(endPoints.users.getUser(id), body, options)
+  const response = await axios.patch(endPoints.users.deleteUser(id), body, options)
 
   return response.data
 }
 
-export { addUser, deleteUser }
+const updateUser = async (id, body) => {
+  const options = {
+    headers: {
+      accept: '*/*',
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const response = await axios.patch(endPoints.users.updateUser(id), body, options)
+
+  return response.data
+}
+
+export { addUser, deleteUser, updateUser }

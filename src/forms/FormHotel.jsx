@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { addHotel } from '../services/api/HotelsAPI'
+import { addHotel, updateHotel } from '../services/api/HotelsAPI'
 
 const FormHotel = ({ setOpen, setAlert, hotel }) => {
   const formRef = useRef(null)
@@ -48,22 +48,28 @@ const FormHotel = ({ setOpen, setAlert, hotel }) => {
       isDeleted: formData.get('isSuscribed') === 'true'
     }
 
-    addHotel(data).then(() => {
-      setAlert({
-        active: true,
-        message: 'Hotel Agregado Correctamente',
-        type: 'success',
-        autoClose: false
+    if (hotel) {
+      updateHotel(hotel.id, data).then((res) => {
+        navigate('/hotels')
       })
-      setOpen(false)
-    }).catch((error) => {
-      setAlert({
-        active: true,
-        message: error.message,
-        type: 'error',
-        autoClose: false
+    } else {
+      addHotel(data).then(() => {
+        setAlert({
+          active: true,
+          message: 'Hotel Agregado Correctamente',
+          type: 'success',
+          autoClose: false
+        })
+        setOpen(false)
+      }).catch((error) => {
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoClose: false
+        })
       })
-    })
+    }
   }
 
   return (

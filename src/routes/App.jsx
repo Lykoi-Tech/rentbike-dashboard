@@ -8,7 +8,9 @@ import { Home } from '../pages/Home'
 import { Login } from '../pages/Login'
 import { General } from '../pages/General'
 import { Users } from '../pages/Users'
+import { EditUser } from '../pages/EditUser'
 import { Hotels } from '../pages/Hotels'
+import { EditHotel } from '../pages/EditHotel'
 import { Bookings } from '../pages/Bookings'
 import { Reviews } from '../pages/Reviews'
 import { Amenities } from '../pages/Amenities'
@@ -28,7 +30,9 @@ const App = () => {
               <Route path='/login' element={<Login />} />
               <Route path='/general' element={<General />} />
               <Route path='/users' element={<Users />} />
+              <Route path='/users/edit/:id' element={<EditUser />} />
               <Route path='/hotels' element={<Hotels />} />
+              <Route path='/hotels/edit/:id' element={<EditHotel />} />
               <Route path='/bookings' element={<Bookings />} />
               <Route path='/reviews' element={<Reviews />} />
               <Route path='/amenities' element={<Amenities />} />
