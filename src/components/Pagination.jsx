@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 const Pagination = ({ thingsPerPage, totalThings, paginateFront, paginateBack, currentPage }) => {
   return (
     <div className='Pagination'>
-      <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 bg-white py-6'>
+      <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 bg-white mb-6'>
         <div className='flex-1 flex justify-between sm:hidden'>
           <button
             disabled={currentPage === 1}

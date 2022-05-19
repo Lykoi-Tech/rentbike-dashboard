@@ -11,10 +11,8 @@ import { endPoints } from '../services/main'
 const Reviews = () => {
   const reviews = useFetch(endPoints.reviews.allReviews)
 
-  console.log(reviews)
-
   const [currentPage, setCurrentPage] = useState(1)
-  const [reviewsPerPage, setReviewsPerPage] = useState(10)
+  const [reviewsPerPage, setReviewsPerPage] = useState(6)
 
   const indexOfLastReview = currentPage * reviewsPerPage
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage

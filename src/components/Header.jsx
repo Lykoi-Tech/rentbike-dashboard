@@ -40,7 +40,7 @@ const Header = () => {
   ]
 
   return (
-    <div className='Header'>
+    <div className='Header mb-6'>
       <Disclosure as='nav' className='bg-white border-b-2'>
         {({ open }) => (
           <>

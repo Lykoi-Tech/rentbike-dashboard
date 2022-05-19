@@ -11,18 +11,20 @@ import { endPoints } from '../services/main'
 const Amenities = () => {
   const amenities = useFetch(endPoints.amenities.allAmenities)
 
+  console.log(amenities)
+
   const [currentPage, setCurrentPage] = useState(1)
-  const [amenitiesPerPage, setAmenitiesPerPage] = useState(10)
+  const [amenitiesPerPage, setAmenitiesPerPage] = useState(6)
 
   const indexOfLastAmenity = currentPage * amenitiesPerPage
   const indexOfFirstUser = indexOfLastAmenity - amenitiesPerPage
-  const currentReviews = amenities?.slice(indexOfFirstUser, indexOfLastAmenity)
+  const currentAmenities = amenities?.slice(indexOfFirstUser, indexOfLastAmenity)
 
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
 
   return (
-    <div className='Users'>
+    <div className='Reviews'>
       <Header />
       <Pagination
         thingsPerPage={amenitiesPerPage}
@@ -39,25 +41,13 @@ const Amenities = () => {
                 <thead className='bg-gray-50'>
                   <tr>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Imagen
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                       # ID
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Nombre y Apellido u Organización
+                      Comodidad
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Tipo de Persona
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Rol
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Suscriptor
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Estado
+                      Eliminado
                     </th>
                     <th scope='col' className='relative px-6 py-3'>
                       <span className='sr-only'>Editar</span>
@@ -68,37 +58,15 @@ const Amenities = () => {
                   </tr>
                 </thead>
                 <tbody className='bg-white divide-y divide-gray-200'>
-                  {currentUsers?.map((user) => (
-                    <tr key={user.email}>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        <img
-                          className='h-10 w-10 rounded-full'
-                          src={`https://ui-avatars.com/api/?background=ff3f3f&color=fff&bold=true&name=${user.firstName || user.organization}`} alt=''
-                        />
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{user.id}</td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        <div>
-                          <div className='text-sm font-medium text-gray-900'>{user.organization || `${user.firstName} ${user.lastName}`}</div>
-                          <div className='text-sm text-gray-500'>{user.email}</div>
-                        </div>
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{user.typePerson}</td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{user.role}</td>
+                  {currentAmenities?.map((amenity) => (
+                    <tr key={amenity.id}>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{amenity.id}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{amenity.name}</td>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         {
-                          user.isSuscribed
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Si</span>
-                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>No</span>
-                        }
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        {
-                          user.isBanned && user.isDeleted
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Eliminado</span>
-                            : user.isBanned
-                              ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800'>Inhabilitado</span>
-                              : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Activo</span>
+                          amenity.isDeleted
+                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Si</span>
+                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>No</span>
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>

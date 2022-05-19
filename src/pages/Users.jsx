@@ -12,7 +12,7 @@ const Users = () => {
   const users = useFetch(endPoints.users.allUsers)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [usersPerPage, setUsersPage] = useState(7)
+  const [usersPerPage, setUsersPage] = useState(6)
 
   const indexOfLastUser = currentPage * usersPerPage
   const indexOfFirstUser = indexOfLastUser - usersPerPage

@@ -9,24 +9,26 @@ import { Pagination } from '../components/Pagination'
 import { endPoints } from '../services/main'
 
 const Cities = () => {
-  const users = useFetch(endPoints.users.allUsers)
+  const cities = useFetch(endPoints.cities.allCities)
+
+  console.log(cities)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [usersPerPage] = useState(10)
+  const [citiesPerPage, setCitiesPerPage] = useState(6)
 
-  const indexOfLastUser = currentPage * usersPerPage
-  const indexOfFirstUser = indexOfLastUser - usersPerPage
-  const currentUsers = users?.slice(indexOfFirstUser, indexOfLastUser)
+  const indexOfLastCity = currentPage * citiesPerPage
+  const indexOfFirstCity = indexOfLastCity - citiesPerPage
+  const currentCity = cities?.slice(indexOfFirstCity, indexOfLastCity)
 
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
 
   return (
-    <div className='Users'>
+    <div className='Reviews'>
       <Header />
       <Pagination
-        thingsPerPage={usersPerPage}
-        totalThings={users?.length}
+        thingsPerPage={citiesPerPage}
+        totalThings={cities?.length}
         currentPage={currentPage}
         paginateBack={paginateBack}
         paginateFront={paginateFront}
@@ -39,25 +41,16 @@ const Cities = () => {
                 <thead className='bg-gray-50'>
                   <tr>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Imagen
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                       # ID
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Nombre y Apellido u Organización
+                      Ciudad
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Tipo de Persona
+                      Del País
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Rol
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Suscriptor
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Estado
+                      Eliminado
                     </th>
                     <th scope='col' className='relative px-6 py-3'>
                       <span className='sr-only'>Editar</span>
@@ -68,38 +61,27 @@ const Cities = () => {
                   </tr>
                 </thead>
                 <tbody className='bg-white divide-y divide-gray-200'>
-                  {currentUsers?.map((user) => (
-                    <tr key={user.email}>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        <img
-                          className='h-10 w-10 rounded-full'
-                          src={`https://ui-avatars.com/api/?background=ff3f3f&color=fff&bold=true&name=${user.firstName || user.organization}`} alt=''
-                        />
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{user.id}</td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        <div>
-                          <div className='text-sm font-medium text-gray-900'>{user.organization || `${user.firstName} ${user.lastName}`}</div>
-                          <div className='text-sm text-gray-500'>{user.email}</div>
-                        </div>
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{user.typePerson}</td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{user.role}</td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
+                  {currentCity?.map((city) => (
+                    <tr key={city.id}>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{city.id}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{city.name}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>
                         {
-                          user.isSuscribed
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Si</span>
-                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>No</span>
+                          city.CountryId === 1
+                            ? 'Argentina'
+                            : city.CountryId === 2
+                              ? 'Brasil'
+                              : city.CountryId === 3
+                                ? 'Chile'
+                                : 'Uruguay'
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         {
-                          user.isBanned && user.isDeleted
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Eliminado</span>
-                            : user.isBanned
-                              ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800'>Inhabilitado</span>
-                              : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Activo</span>
-                        }
+                      city.isDeleted
+                        ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Si</span>
+                        : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>No</span>
+                    }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
                         <a href='/edit' className='text-indigo-600 hover:text-indigo-900'>
