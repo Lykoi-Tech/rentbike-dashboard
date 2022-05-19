@@ -8,15 +8,15 @@ import { Pagination } from '../components/Pagination'
 
 import { endPoints } from '../services/main'
 
-const Users = () => {
-  const users = useFetch(endPoints.users.allUsers)
+const Amenities = () => {
+  const amenities = useFetch(endPoints.amenities.allAmenities)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [usersPerPage, setUsersPage] = useState(7)
+  const [amenitiesPerPage, setAmenitiesPerPage] = useState(10)
 
-  const indexOfLastUser = currentPage * usersPerPage
-  const indexOfFirstUser = indexOfLastUser - usersPerPage
-  const currentUsers = users?.slice(indexOfFirstUser, indexOfLastUser)
+  const indexOfLastAmenity = currentPage * amenitiesPerPage
+  const indexOfFirstUser = indexOfLastAmenity - amenitiesPerPage
+  const currentReviews = amenities?.slice(indexOfFirstUser, indexOfLastAmenity)
 
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
@@ -25,8 +25,8 @@ const Users = () => {
     <div className='Users'>
       <Header />
       <Pagination
-        thingsPerPage={usersPerPage}
-        totalThings={users?.length}
+        thingsPerPage={amenitiesPerPage}
+        totalThings={amenities?.length}
         currentPage={currentPage}
         paginateBack={paginateBack}
         paginateFront={paginateFront}
@@ -69,28 +69,16 @@ const Users = () => {
                 </thead>
                 <tbody className='bg-white divide-y divide-gray-200'>
                   {currentUsers?.map((user) => (
-                    <tr key={user.id}>
+                    <tr key={user.email}>
                       <td className='px-6 py-4 whitespace-nowrap'>
-                        {
-                          user.organization === null
-                            ? <img
-                                className='h-10 w-10 rounded-2xl object-cover'
-                                src={`https://ui-avatars.com/api/?background=ff3f3f&color=fff&bold=true&name=${user.firstName}+${user.lastName}`} alt=''
-                              />
-                            : <img
-                                className='h-10 w-10 rounded-2xl object-cover'
-                                src={`https://ui-avatars.com/api/?background=ff3f3f&color=fff&bold=true&name=${user.organization}`} alt=''
-                              />
-                        }
+                        <img
+                          className='h-10 w-10 rounded-full'
+                          src={`https://ui-avatars.com/api/?background=ff3f3f&color=fff&bold=true&name=${user.firstName || user.organization}`} alt=''
+                        />
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{user.id}</td>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         <div>
-                          {
-                            user.organization
-                              ? <div className='text-sm font-medium text-purple-600 underline'>Organización</div>
-                              : <div className='text-sm font-medium text-emerald-600 underline'>Usuario</div>
-                          }
                           <div className='text-sm font-medium text-gray-900'>{user.organization || `${user.firstName} ${user.lastName}`}</div>
                           <div className='text-sm text-gray-500'>{user.email}</div>
                         </div>
@@ -135,4 +123,4 @@ const Users = () => {
   )
 }
 
-export { Users }
+export { Amenities }

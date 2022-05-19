@@ -8,25 +8,25 @@ import { Pagination } from '../components/Pagination'
 
 import { endPoints } from '../services/main'
 
-const Users = () => {
-  const users = useFetch(endPoints.users.allUsers)
+const Hotels = () => {
+  const hotels = useFetch(endPoints.hotels.allHotels)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [usersPerPage, setUsersPage] = useState(7)
+  const [hotelsPerPage, setHotelsPerPage] = useState(6)
 
-  const indexOfLastUser = currentPage * usersPerPage
-  const indexOfFirstUser = indexOfLastUser - usersPerPage
-  const currentUsers = users?.slice(indexOfFirstUser, indexOfLastUser)
+  const indexOfLastHotel = currentPage * hotelsPerPage
+  const indexOfFirstHotel = indexOfLastHotel - hotelsPerPage
+  const currentHotels = hotels?.slice(indexOfFirstHotel, indexOfLastHotel)
 
   const paginateFront = () => setCurrentPage(currentPage + 1)
   const paginateBack = () => setCurrentPage(currentPage - 1)
 
   return (
-    <div className='Users'>
+    <div className='Hotels'>
       <Header />
       <Pagination
-        thingsPerPage={usersPerPage}
-        totalThings={users?.length}
+        thingsPerPage={hotelsPerPage}
+        totalThings={hotels?.length}
         currentPage={currentPage}
         paginateBack={paginateBack}
         paginateFront={paginateFront}
@@ -45,16 +45,13 @@ const Users = () => {
                       # ID
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Nombre y Apellido u Organización
+                      Nombre
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Tipo de Persona
+                      País
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Rol
-                    </th>
-                    <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Suscriptor
+                      Contacto
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                       Estado
@@ -68,47 +65,29 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody className='bg-white divide-y divide-gray-200'>
-                  {currentUsers?.map((user) => (
-                    <tr key={user.id}>
+                  {currentHotels?.map((hotel) => (
+                    <tr key={hotel.id}>
                       <td className='px-6 py-4 whitespace-nowrap'>
-                        {
-                          user.organization === null
-                            ? <img
-                                className='h-10 w-10 rounded-2xl object-cover'
-                                src={`https://ui-avatars.com/api/?background=ff3f3f&color=fff&bold=true&name=${user.firstName}+${user.lastName}`} alt=''
-                              />
-                            : <img
-                                className='h-10 w-10 rounded-2xl object-cover'
-                                src={`https://ui-avatars.com/api/?background=ff3f3f&color=fff&bold=true&name=${user.organization}`} alt=''
-                              />
-                        }
+                        <img
+                          className='h-20 w-20 rounded-2xl object-cover'
+                          src={hotel.mainImage} alt=''
+                        />
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{user.id}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{hotel.id}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{hotel.name}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{hotel.Country.name}</td>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         <div>
-                          {
-                            user.organization
-                              ? <div className='text-sm font-medium text-purple-600 underline'>Organización</div>
-                              : <div className='text-sm font-medium text-emerald-600 underline'>Usuario</div>
-                          }
-                          <div className='text-sm font-medium text-gray-900'>{user.organization || `${user.firstName} ${user.lastName}`}</div>
-                          <div className='text-sm text-gray-500'>{user.email}</div>
+                          <div className='text-sm font-medium text-gray-900'>{hotel.phone}</div>
+                          <div className='text-sm text-gray-500'>{hotel.email}</div>
+                          <a href={hotel.web} className='text-sm font-medium text-purple-600 underline'>Ir a página web</a>
                         </div>
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{user.typePerson}</td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize'>{user.role}</td>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         {
-                          user.isSuscribed
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Si</span>
-                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>No</span>
-                        }
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        {
-                          user.isBanned && user.isDeleted
+                          hotel.isBanned && hotel.isDeleted
                             ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Eliminado</span>
-                            : user.isBanned
+                            : hotel.isBanned
                               ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800'>Inhabilitado</span>
                               : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Activo</span>
                         }
@@ -135,4 +114,4 @@ const Users = () => {
   )
 }
 
-export { Users }
+export { Hotels }
