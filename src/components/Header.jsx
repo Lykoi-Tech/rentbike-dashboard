@@ -12,7 +12,8 @@ const navigation = [
   { name: 'Reseñas', href: '#', current: false },
   { name: 'Comodidades', href: '#', current: false },
   { name: 'Países', href: '#', current: false },
-  { name: 'Ciudades', href: '#', current: false }
+  { name: 'Ciudades', href: '#', current: false },
+  { name: 'Suscriptores', href: '#', current: false }
 ]
 
 function classNames (...classes) {
