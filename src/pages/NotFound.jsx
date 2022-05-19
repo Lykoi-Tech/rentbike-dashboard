@@ -7,7 +7,7 @@ const NotFound = () => {
         <div class='container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40'>
           <div class='w-full font-mono flex flex-col items-center relative z-10'>
             <h1 class='font-extrabold text-5xl text-center text-white leading-tight mt-4'>
-              You are all alone here
+              Estás solo aquí
             </h1>
             <p class='font-extrabold text-8xl my-44 text-white animate-bounce'>
               404
