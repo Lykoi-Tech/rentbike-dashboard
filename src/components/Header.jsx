@@ -1,26 +1,20 @@
 import { useAuth } from '../hooks/useAuth'
 
+import { useLocation } from 'react-router-dom'
+
 import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 import logo from '../assets/logo.svg'
 
-const navigation = [
-  { name: 'Usuarios', href: '#', current: true },
-  { name: 'Hoteles', href: '#', current: false },
-  { name: 'Reseñas', href: '#', current: false },
-  { name: 'Comodidades', href: '#', current: false },
-  { name: 'Países', href: '#', current: false },
-  { name: 'Ciudades', href: '#', current: false },
-  { name: 'Suscriptores', href: '#', current: false }
-]
-
 function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const Header = () => {
+  const location = useLocation()
+
   const [userData, setUserData] = useState(null)
   const auth = useAuth()
 
@@ -33,6 +27,17 @@ const Header = () => {
       setUserData(user)
     }
   }, [])
+
+  const navigation = [
+    { name: 'General', href: '/general', current: location.pathname.substring(1) === 'general' },
+    { name: 'Usuarios', href: '/users', current: location.pathname.substring(1) === 'users' },
+    { name: 'Hoteles', href: '/hotels', current: location.pathname.substring(1) === 'hotels' },
+    { name: 'Reseñas', href: '/reviews', current: location.pathname.substring(1) === 'reviews' },
+    { name: 'Comodidades', href: '/amenities', current: location.pathname.substring(1) === 'amenities' },
+    { name: 'Países', href: '/countries', current: location.pathname.substring(1) === 'countries' },
+    { name: 'Ciudades', href: '/cities', current: location.pathname.substring(1) === 'cities' },
+    { name: 'Suscriptores', href: '/suscriptors', current: location.pathname.substring(1) === 'suscriptors' }
+  ]
 
   return (
     <div className='Header'>
