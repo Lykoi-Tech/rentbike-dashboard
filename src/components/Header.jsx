@@ -37,7 +37,8 @@ const Header = () => {
     { name: 'Comodidades', href: '/amenities', current: location.pathname.substring(1) === 'amenities' },
     { name: 'Países', href: '/countries', current: location.pathname.substring(1) === 'countries' },
     { name: 'Ciudades', href: '/cities', current: location.pathname.substring(1) === 'cities' },
-    { name: 'Suscriptores', href: '/suscriptors', current: location.pathname.substring(1) === 'suscriptors' }
+    { name: 'Suscriptores', href: '/suscriptors', current: location.pathname.substring(1) === 'suscriptors' },
+    { name: 'Facturas', href: '/billings', current: location.pathname.substring(1) === 'billings' }
   ]
 
   return (

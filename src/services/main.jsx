@@ -57,9 +57,16 @@ const endPoints = {
   suscriptors: {
     addSuscriptor: `${API}/api/${VERSION}/suscriptors`,
     allSuscriptors: `${API}/api/${VERSION}/suscriptors`,
-    getSuscriptor: (id) => `${API}/api/${VERSION}/Ss/${id}`,
+    getSuscriptor: (id) => `${API}/api/${VERSION}/suscriptors/${id}`,
     updateSuscriptor: (id) => `${API}/api/${VERSION}/suscriptors/${id}`,
     deleteSuscriptor: (id) => `${API}/api/${VERSION}/suscriptors/${id}`
+  },
+  billings: {
+    addBilling: `${API}/api/${VERSION}/billings`,
+    allBillings: `${API}/api/${VERSION}/billings`,
+    getBilling: (id) => `${API}/api/${VERSION}/billings/${id}`,
+    updateBilling: (id) => `${API}/api/${VERSION}/billings/${id}`,
+    deleteBilling: (id) => `${API}/api/${VERSION}/billings/${id}`
   }
 }
 

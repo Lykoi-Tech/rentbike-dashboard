@@ -17,6 +17,7 @@ import { Amenities } from '../pages/Amenities'
 import { Countries } from '../pages/Countries'
 import { Cities } from '../pages/Cities'
 import { Suscriptors } from '../pages/Suscriptors'
+import { Billings } from '../pages/Billings'
 import { NotFound } from '../pages/NotFound'
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
               <Route path='/countries' element={<Countries />} />
               <Route path='/cities' element={<Cities />} />
               <Route path='/suscriptors' element={<Suscriptors />} />
+              <Route path='/billings' element={<Billings />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </Layout>
