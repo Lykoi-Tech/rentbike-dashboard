@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useFetch } from '../hooks/useFetch'
 
@@ -14,10 +14,32 @@ import { endPoints } from '../services/main'
 
 import { PlusIcon } from '@heroicons/react/solid'
 
+import axios from 'axios'
+
+import { useAlert } from '../hooks/useAlert'
+
+import { Alert } from '../components/Alert'
+
 const Users = () => {
-  const users = useFetch(endPoints.users.allUsers)
+  const [users, setUsers] = useState([])
 
   const [open, setOpen] = useState(false)
+
+  const { alert, setAlert, toggleAlert } = useAlert()
+
+  useEffect(() => {
+    async function getUsers () {
+      const response = await axios.get(endPoints.users.allUsers)
+
+      setUsers(response.data)
+    }
+
+    try {
+      getUsers()
+    } catch (error) {
+      console.error(error)
+    }
+  }, [alert])
 
   const [currentPage, setCurrentPage] = useState(1)
   const [usersPerPage, setUsersPage] = useState(6)
@@ -51,6 +73,7 @@ const Users = () => {
           </div>
         </div>
       </div>
+      <Alert alert={alert} handleClose={toggleAlert} />
       {
         users?.length > 6 && <Pagination
           thingsPerPage={usersPerPage}
@@ -161,7 +184,7 @@ const Users = () => {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <FormUser />
+        <FormUser setOpen={setOpen} setAlert={setAlert} />
       </Modal>
     </div>
   )
