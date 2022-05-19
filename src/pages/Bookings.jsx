@@ -104,8 +104,8 @@ const Bookings = () => {
                       <td className='px-6 py-4 whitespace-nowrap'>
                         {
                           booking.paidOut
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Si</span>
-                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>No</span>
+                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Pagado</span>
+                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Pendiente</span>
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap'>

@@ -6,12 +6,18 @@ import { Header } from '../components/Header'
 
 import { Pagination } from '../components/Pagination'
 
+import { Modal } from '../components/Modal'
+
+import { FormUser } from '../forms/FormUser'
+
 import { endPoints } from '../services/main'
 
 import { PlusIcon } from '@heroicons/react/solid'
 
 const Users = () => {
   const users = useFetch(endPoints.users.allUsers)
+
+  const [open, setOpen] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1)
   const [usersPerPage, setUsersPage] = useState(6)
@@ -34,6 +40,7 @@ const Users = () => {
           <div className='mt-5 flex lg:mt-0 lg:ml-4'>
             <span className='sm:ml-3'>
               <button
+                onClick={() => setOpen(true)}
                 type='button'
                 className='inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
               >
@@ -111,7 +118,7 @@ const Users = () => {
                           {
                             user.organization
                               ? <div className='text-sm font-medium text-purple-600 underline'>Organización</div>
-                              : <div className='text-sm font-medium text-emerald-600 underline'>Usuario</div>
+                              : <div className='text-sm font-medium text-pink-400 underline'>Usuario</div>
                           }
                           <div className='text-sm font-medium text-gray-900'>{user.organization || `${user.firstName} ${user.lastName}`}</div>
                           <div className='text-sm text-gray-500'>{user.email}</div>
@@ -122,8 +129,8 @@ const Users = () => {
                       <td className='px-6 py-4 whitespace-nowrap'>
                         {
                           user.isSuscribed
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Si</span>
-                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>No</span>
+                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Suscrito</span>
+                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Desuscrito</span>
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap'>
@@ -153,6 +160,9 @@ const Users = () => {
           </div>
         </div>
       </div>
+      <Modal open={open} setOpen={setOpen}>
+        <FormUser />
+      </Modal>
     </div>
   )
 }

@@ -67,7 +67,7 @@ const Amenities = () => {
                       Comodidad
                     </th>
                     <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Eliminado
+                      Estado
                     </th>
                     <th scope='col' className='relative px-6 py-3'>
                       <span className='sr-only'>Editar</span>
@@ -85,8 +85,8 @@ const Amenities = () => {
                       <td className='px-6 py-4 whitespace-nowrap'>
                         {
                           amenity.isDeleted
-                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Si</span>
-                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>No</span>
+                            ? <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800'>Eliminado</span>
+                            : <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Activo</span>
                         }
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
