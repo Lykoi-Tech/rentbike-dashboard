@@ -29,16 +29,10 @@ const Header = () => {
   }, [])
 
   const navigation = [
-    { name: 'General', href: '/general', current: location.pathname.substring(1) === 'general' },
-    { name: 'Usuarios', href: '/users', current: location.pathname.substring(1) === 'users' },
-    { name: 'Hoteles', href: '/hotels', current: location.pathname.substring(1) === 'hotels' },
-    { name: 'Reservas', href: '/bookings', current: location.pathname.substring(1) === 'bookings' },
-    { name: 'Reseñas', href: '/reviews', current: location.pathname.substring(1) === 'reviews' },
-    { name: 'Comodidades', href: '/amenities', current: location.pathname.substring(1) === 'amenities' },
-    { name: 'Países', href: '/countries', current: location.pathname.substring(1) === 'countries' },
-    { name: 'Ciudades', href: '/cities', current: location.pathname.substring(1) === 'cities' },
-    { name: 'Suscriptores', href: '/suscriptors', current: location.pathname.substring(1) === 'suscriptors' },
-    { name: 'Facturas', href: '/billings', current: location.pathname.substring(1) === 'billings' }
+    // { name: 'General', href: '/general', current: location.pathname.substring(1) === 'general' },
+    { name: 'User Management', href: '/users', current: location.pathname.substring(1) === 'users' },
+    { name: 'Bicycle Management', href: '/hotels', current: location.pathname.substring(1) === 'hotels' },
+    { name: 'Rent Management', href: '/bookings', current: location.pathname.substring(1) === 'bookings' }
   ]
 
   return (
@@ -62,14 +56,14 @@ const Header = () => {
                 </div>
                 <div className='flex-1 flex items-center justify-center sm:items-stretch sm:justify-start'>
                   <div className='flex-shrink-0 flex items-center'>
-                    <Link to='/'>
+                    <Link to='#'>
                       <img
                         className='block lg:hidden h-8 w-auto'
                         src={logo}
                         alt='Workflow'
                       />
                     </Link>
-                    <Link to='/'>
+                    <Link to='#'>
                       <img
                         className='hidden lg:block h-8 w-auto'
                         src={logo}
@@ -124,7 +118,7 @@ const Header = () => {
                               href='/'
                               className={classNames(active ? 'bg-red-100' : '', 'cursor-pointer block px-4 py-2 text-sm text-red-700')}
                             >
-                              Cerrar Sesión
+                              Logout
                             </button>
                           )}
                         </Menu.Item>
